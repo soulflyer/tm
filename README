@@ -1,1 +1,13 @@
 Tm is a setup script for tmux. It's an executable shell script so run tm help to see what it does.
+
+tm looks for a .tmux file in the current directory. This file should contain commands to create a new window which will be attached to the current session. A new session will be started if necessary.
+
+tm can create a .tmux file for you by using the new option.
+
+don't forget to add .tmux to your .gitignore
+
+the directory dottmux contains examples of my favorite layouts.
+
+TODO:
+tm will only work with the current directory. It needs to be able to accept a path on the command line and open a new window on that.
+A different session can be specified when using the new option, but not without it. This needs to be consistent, either remove the ability to specify a different session or make it possible to specify a different session when running tm without the new option

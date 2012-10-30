@@ -4,14 +4,14 @@ if [ "$1" = "?" ] || [ "$1" = help ] || [ "$1" = h ]
 then
     cat <<EOF
 
-tm new config
-    creates a new .tmux in the current directory which runs mux config
+tm new session
+    creates a new .tmux in the current directory and runs tmux
 
 tm new (or n)
-    creates a new .tmux in the current directory using the default config
+    creates a new .tmux in the current directory and runs tmux with the default session name (dev)
 
 tm
-    starts or attaches to tmux using the .tmux file if present
+    starts or attaches to tmux using the .tmux file (if present) to create a new window
 
 tm ?  (or h or help)
     this message
@@ -20,23 +20,23 @@ else
     PATHNAME=`pwd`
     LABEL=`basename $PATHNAME`
 
-    DEFAULT_CONFIG="dev"
+    SESSION="dev"
 
     if [ $2 ]
     then
-        DEFAULT_CONFIG=$2
+        SESSION=$2
     fi
 
     if [ -e ./.tmux ]
     then
         echo "Found tmux conf file"
-        if ! tmux has-session -t $DEFAULT_CONFIG
+        if ! tmux has-session -t $SESSION
         then
             echo "creating new empty session"
-            tmux -s $DEFAULT_CONFIG
+            tmux -s $SESSION
         else
             echo "Attaching to existing session"
-            tmux attach -t $DEFAULT_CONFIG
+            tmux attach -t $SESSION
         fi
         echo "Adding window to session by running $PATHNAME/.tmux"
         exec ./.tmux
@@ -74,7 +74,7 @@ then
     tmux set default-path \$PATHNAME
     tmux new-window -d -n \$LABEL
     tmux split-window -d -h -t \$LABEL
-    tmux split-window -d -v -t \$LABEL 'emacsclient -nw .'
+    tmux split-window -d -v -t \$LABEL 'emacsclient -nw . ; bash -l'
 # Set the layout by hand then call tmux list-windows to get the incantation for select-layout
     tmux select-layout -t \$LABEL "5c65,204x63,0,0{111x63,0,0,92x63,112,0[92x43,112,0,92x19,112,44]}"
     tmux select-window -t \$LABEL
@@ -87,13 +87,13 @@ EOF
             chmod a+x ./.tmux
             exec ./.tmux
         fi
-        if ! tmux has-session -t $DEFAULT_CONFIG
+        if ! tmux has-session -t $SESSION
         then
             echo "creating new development session"
-            exec mux $DEFAULT_CONFIG
+            exec mux $SESSION
         else
             echo "Attaching to existing session"
-            tmux attach -t $DEFAULT_CONFIG
+            tmux attach -t $SESSION
         fi
     fi
 fi
