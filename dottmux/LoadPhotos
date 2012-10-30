@@ -8,10 +8,10 @@
 
 # Set the window name to the last part of the directory path
 PATHNAME=`pwd`
-LABEL=`basename /Users/iain/Code/LoadPhotos`
+LABEL=`basename $PATHNAME | tr '.' '_'`
 
 # get the current active session name (there has to be a better way than this :-/
-SESSION='tmux list-sessions -F "#{session_name}#{session_attached}" | tr -d '\n' | sed s/[a-zA-Z_-]*0// | sed s/1$//'
+# SESSION='tmux list-sessions -F "#{session_name}#{session_attached}" | tr -d '\n' | sed s/[a-zA-Z_-]*0// | sed s/1$//'
 
 # Check if the window already exists, but don't stay on it so we can see the warning
 # message.
@@ -34,10 +34,12 @@ then
 # Set the layout by hand then call tmux list-windows to get the incantation for select-layout
     tmux select-layout -t $LABEL "  67,204x64,0,0{111x64,0,0,92x64,112,0[92x30,112,0,92x22,112,31,92x10,112,54]}"
     tmux select-window -t $LABEL
-    tmux send-keys -t :$LABEL.2 'ec ./features' C-m
+    tmux send-keys -t :$LABEL.3 'ec .' C-m
     # emacs client screws up if this sleep is removed or shortened
     sleep 3
-    tmux send-keys -t :$LABEL.3 'ec .' C-m
+    tmux send-keys -t :$LABEL.2 'ec ./features' C-m
+    tmux select-pane -t 2
+
 # *************************************************************************************
 
 else

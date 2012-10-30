@@ -54,9 +54,10 @@ else
 # the window is complete before displaying it with select-window. tmux messes up the
 # initial display if you don't.
 
-# Set the window name to the last part of the directory path
+# Set the window name to the last part of the directory path, removing any . in the
+# directory name so tmux doesn't confuse it with a pane separator.
 PATHNAME=\`pwd\`
-LABEL=\`basename $PATHNAME\`
+LABEL=\`basename \$PATHNAME | tr '.' '_' \`
 
 # Check if the window already exists, but don't stay on it so we can see the warning
 # message.
