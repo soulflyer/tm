@@ -33,13 +33,12 @@ else
         if ! tmux has-session -t $SESSION
         then
             echo "creating new empty session"
-            tmux -s $SESSION
-        else
-            echo "Attaching to existing session"
-            tmux attach -t $SESSION
+            tmux new-session -d -s $SESSION
         fi
         echo "Adding window to session by running $PATHNAME/.tmux"
-        exec ./.tmux
+        bash ./.tmux
+        echo "Attaching to session"
+        tmux attach -t $SESSION
     else
         echo "No project .tmux found"
         if [ "$1" = "n" ] || [ "$1" = "new" ]
@@ -57,7 +56,7 @@ else
 # Set the window name to the last part of the directory path, removing any . in the
 # directory name so tmux doesn't confuse it with a pane separator.
 PATHNAME=\`pwd\`
-LABEL=\`basename \$PATHNAME | tr '.' '_' \`
+LABEL=\`basename \$PATHNAME | tr -d '.' \`
 
 # Check if the window already exists, but don't stay on it so we can see the warning
 # message.
