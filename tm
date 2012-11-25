@@ -38,7 +38,7 @@ else
         echo "Adding window to session by running $PATHNAME/.tmux"
         bash ./.tmux
         echo "Attaching to session"
-        tmux attach -t $SESSION
+        tmux attach
     else
         echo "No project .tmux found"
         if [ "$1" = "n" ] || [ "$1" = "new" ]
