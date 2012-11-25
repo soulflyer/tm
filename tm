@@ -44,8 +44,14 @@ else
         if [ "$1" = "n" ] || [ "$1" = "new" ]
         then
             echo "Create new .tmux"
-            cat <<EOF > ./.tmux
+            if [ ~/.tmux.default ]
+            then
+                cp ~/.tmux.default ./.tmux.default
+            else
+                cat <<EOF > ./.tmux
 #!/bin/bash
+#
+# this file was created by tm new
 #
 # Contains commands to add a new window to an existing tmux session
 #
@@ -84,16 +90,24 @@ else
     echo "Warning: window called \$LABEL already exists"
 fi
 EOF
-            chmod a+x ./.tmux
-            exec ./.tmux
+                chmod a+x ./.tmux
+                exec ./.tmux
+            fi
         fi
-        if ! tmux has-session -t $SESSION
+        if ! tmux has-session
         then
             echo "creating new development session"
-            exec mux $SESSION
+            tmux -t $SESSION
         else
             echo "Attaching to existing session"
-            tmux attach -t $SESSION
+            if [ -e ~/.tmux.default ]
+            then
+                echo "Adding window to session by running ~/.tmux.default"
+                bash ~/.tmux.default
+            else
+                tmux new-window -n $LABEL
+            fi
+            tmux attach
         fi
     fi
 fi
