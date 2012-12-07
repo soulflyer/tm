@@ -97,7 +97,7 @@ EOF
         if ! tmux has-session
         then
             echo "creating new development session"
-            tmux -t $SESSION
+            tmux new -s $SESSION
         else
             echo "Attaching to existing session"
             if [ -e ~/.tmux.default ]
