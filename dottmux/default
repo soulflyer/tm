@@ -8,21 +8,6 @@
 # the window is complete before displaying it with select-window. tmux messes up the
 # initial display if you don't.
 
-# Set the window name to the last part of the directory path, removing any . in the
-# directory name so tmux doesn't confuse it with a pane separator.
-PATHNAME=`pwd`
-LABEL=`basename $PATHNAME | tr -d '.' `
-
-# Check if the window already exists, but don't stay on it so we can see the warning
-# message.
-tmux select-window -t $LABEL
-WINDOW_EXISTS=$?
-
-tmux select-window -n
-
-if [ $WINDOW_EXISTS = 1 ]
-then
-
 # *************************************************************************************
 # Build your window here
 # *************************************************************************************
@@ -36,7 +21,3 @@ then
     # Put the cursor in pane 2 (the top right pane, running emacs client)
     tmux select-pane -t 2
 # *************************************************************************************
-
-else
-    echo "Warning: window called $LABEL already exists"
-fi

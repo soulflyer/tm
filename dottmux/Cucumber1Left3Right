@@ -6,23 +6,6 @@
 # the window is complete before displaying it with select-window. tmux messes up the
 # initial display if you don't.
 
-# Set the window name to the last part of the directory path
-PATHNAME=`pwd`
-LABEL=`basename $PATHNAME | tr '.' '_'`
-
-# get the current active session name (there has to be a better way than this :-/
-# SESSION='tmux list-sessions -F "#{session_name}#{session_attached}" | tr -d '\n' | sed s/[a-zA-Z_-]*0// | sed s/1$//'
-
-# Check if the window already exists, but don't stay on it so we can see the warning
-# message.
-tmux select-window -t $LABEL
-WINDOW_EXISTS=$?
-
-tmux select-window -n
-
-if [ $WINDOW_EXISTS = 1 ]
-then
-
 # *************************************************************************************
 # Build your window here
 # *************************************************************************************
@@ -41,7 +24,3 @@ then
     tmux select-pane -t 2
 
 # *************************************************************************************
-
-else
-    echo "Warning: window called $LABEL already exists"
-fi
