@@ -45,13 +45,13 @@ EOF
 # *************************************************************************************
 # Build your window here
 # *************************************************************************************
-    tmux set default-path \$PATHNAME
-    tmux new-window -d -n \$LABEL
-    tmux split-window -d -h -t \$LABEL
-    tmux split-window -d -v -t \$LABEL 'emacsclient -nw . ; bash -l'
+tmux set default-path \$PATHNAME
+tmux new-window -d -n \$LABEL
+tmux split-window -d -h -t \$LABEL
+tmux split-window -d -v -t \$LABEL 'emacsclient -nw . ; bash -l'
 # Set the layout by hand then call tmux list-windows to get the incantation for select-layout
-    tmux select-layout -t \$LABEL "5c65,204x63,0,0{111x63,0,0,92x63,112,0[92x43,112,0,92x19,112,44]}"
-    tmux select-window -t \$LABEL
+tmux select-layout -t \$LABEL "5c65,204x63,0,0{111x63,0,0,92x63,112,0[92x43,112,0,92x19,112,44]}"
+tmux select-window -t \$LABEL
 # *************************************************************************************
 EOF
                 chmod a+x ./.tmux

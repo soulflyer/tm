@@ -9,18 +9,18 @@
 # *************************************************************************************
 # Build your window here
 # *************************************************************************************
-    tmux set default-path $PATHNAME
-    tmux new-window -d -n $LABEL 'cucumber ; bash -l'
-    tmux split-window -d -h -t $LABEL
-    tmux split-window -d -h -t $LABEL #'emacsclient -nw . ; bash -l'
-    tmux split-window -d -v -t $LABEL
-# Set the layout by hand then call tmux list-windows to get the incantation for select-layout
-    tmux select-layout -t $LABEL "  67,204x64,0,0{111x64,0,0,92x64,112,0[92x30,112,0,92x22,112,31,92x10,112,54]}"
-    tmux select-window -t $LABEL
-    tmux send-keys -t :$LABEL.3 'ec .' C-m
-    # emacs client screws up if this sleep is removed or shortened
-    sleep 3
-    tmux send-keys -t :$LABEL.2 'ec ./features' C-m
-    tmux select-pane -t 2
+tmux set default-path $PATHNAME
+tmux new-window -d -n $LABEL 'cucumber ; bash -l'
+tmux split-window -d -h -t $LABEL
+tmux split-window -d -h -t $LABEL #'emacsclient -nw . ; bash -l'
+tmux split-window -d -v -t $LABEL
+t the layout by hand then call tmux list-windows to get the incantation for select-layout
+tmux select-layout -t $LABEL "  67,204x64,0,0{111x64,0,0,92x64,112,0[92x30,112,0,92x22,112,31,92x10,112,54]}"
+tmux select-window -t $LABEL
+tmux send-keys -t :$LABEL.3 'ec .' C-m
+# emacs client screws up if this sleep is removed or shortened
+sleep 3
+tmux send-keys -t :$LABEL.2 'ec ./features' C-m
+tmux select-pane -t 2
 
 # *************************************************************************************
