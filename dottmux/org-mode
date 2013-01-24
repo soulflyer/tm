@@ -24,7 +24,7 @@ tmux select-window -t $LABEL
 sleep 3
 tmux send-keys -t :$LABEL.2 'ec .' C-m
 sleep 3
-tmux send-keys -t :$LABEL.2 C-c 'o'
+tmux send-keys -t :$LABEL.2 M-x 'org-todo-list' C-m
 
 
 # Put the cursor in pane 2 (the top right pane, running emacs client)
