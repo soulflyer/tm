@@ -12,8 +12,7 @@
 # Build your window here
 # *************************************************************************************
 tmux set default-path $PATHNAME
-tmux new-window -d -n $LABEL 'emacsclient -nw .
- ; bash -l'
+tmux new-window -d -n $LABEL 'emacsclient -nw . ; bash -l'
 tmux split-window -d -h -t $LABEL
 tmux split-window -d -v -t $LABEL
 t the layout by hand then call tmux list-windows to get the incantation for select-layout
