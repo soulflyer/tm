@@ -12,7 +12,7 @@
 # Build your window here
 # *************************************************************************************
 tmux set default-path $PATHNAME
-LABEL="Clojure"
+LABEL="Clojure-$LABEL"
 export $LABEL
 tmux new-window -d -n $LABEL
 tmux split-window -d -h -t $LABEL

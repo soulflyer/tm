@@ -26,7 +26,7 @@ tm ?  (or h or help)
 EOF
         ;;
         "n" )
-            echo "Create new .tmux"
+        # Create new .tmux file
             if [ ~/.tmux.default ]
             then
                 cp ~/.tmux.default ./.tmux
@@ -77,24 +77,32 @@ echo "Label $LABEL"
 
 export LABEL PATHNAME
 
+echo "*******"
+if ! tmux list-sessions
+then
+    echo "No session, creating a new one"
+    tmux new-session -d -s dev
+    if [ -e ~/.tmux.startup ]
+    then
+        echo "Adding startup windows"
+        bash ~/.tmux.startup
+    else
+        tmux set default-path ~
+        tmux rename-window $LABEL
+        tmux split-window -h
+        tmux split-window -v
+    fi
+else
+    echo "found session"
+fi
+
 WINDOW=`tmux list-windows | awk '{ print $2 }' | grep ^$LABEL$`
 echo "WINDOW: $WINDOW"
 if [[ -z $WINDOW ]]
 then
-    if ! tmux has-session -t $SESSION
-    then
-        echo "creating new empty session"
-        tmux new-session -d -s $SESSION
-    fi
-
     if [ -e $PATHNAME/.tmux ]
     then
         echo "Found tmux conf file"
-        if ! tmux has-session -t $SESSION
-        then
-            echo "creating new empty session"
-            tmux new-session -d -s $SESSION
-        fi
         echo "Adding window to session by running $PATHNAME/.tmux"
         bash $PATHNAME/.tmux
         echo "Attaching to session"
@@ -105,11 +113,11 @@ then
             echo "Adding window to session by running ~/.tmux.default"
             bash ~/.tmux.default
         else
+            echo "Creating new tmux window"
             tmux new-window -n $LABEL
         fi
     fi
-    echo "attaching"
-    tmux attach
 else
     echo "Warning: window called $WINDOW already exists"
 fi
+tmux attach
