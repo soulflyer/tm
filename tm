@@ -100,6 +100,8 @@ WINDOW=`tmux list-windows | awk '{ print $2 }' | grep ^$LABEL$`
 echo "WINDOW: $WINDOW"
 if [[ -z $WINDOW ]]
 then
+    tmux set default-path $PATHNAME
+    tmux new-window -d -n $LABEL
     if [ -e $PATHNAME/.tmux ]
     then
         echo "Found tmux conf file"
@@ -114,7 +116,7 @@ then
             bash ~/.tmux.default
         else
             echo "Creating new tmux window"
-            tmux new-window -n $LABEL
+#            tmux new-window -n $LABEL
         fi
     fi
 else
