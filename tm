@@ -77,7 +77,6 @@ echo "pathname $PATHNAME"
 if ! tmux list-sessions
 then
     cd ~
-    tmux set default-path ~
     echo "No session, creating a new one"
     tmux new-session -d -s dev
     tmux rename-window `basename $HOME`
