@@ -1,0 +1,8 @@
+windowname="ssh"
+tmux set default-path ~
+tmux new-window -dn $windowname
+tmux split-window -d -h -t :$windowname
+tmux split-window -d -v -t :$windowname 'ssh Mimi.local ; ssh 113.165.171.96 ; bash -l'
+tmux select-layout -t :$windowname "d567,204x67,0,0{111x67,0,0,92x67,112,0[92x35,112,0,92x31,112,36]}"
+# tmux send-keys -t :$windowname.3 'ssh jphuquoc@soulflyer.co.uk' C-m
+tmux select-window -t $windowname
