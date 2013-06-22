@@ -1,5 +1,5 @@
 windowname="ssh"
-mimiIP="113.165.133.84"
+mimiIP="113.165.142.211"
 tmux set default-path ~
 tmux new-window -dn $windowname
 tmux split-window -d -h -t :$windowname
