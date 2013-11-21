@@ -71,6 +71,11 @@ then
 fi
 echo "pathname $PATHNAME"
 
+LABEL=`basename $PATHNAME`
+echo "Label $LABEL"
+
+export LABEL PATHNAME
+
 # If there isn't already a tmux session running then start one with a default window
 # and a window on the current  (or specified) directory. If it is started from the
 # home directory then only the default window will be created
@@ -92,13 +97,8 @@ else
     echo "found session"
 fi
 
-LABEL=`basename $PATHNAME`
-echo "Label $LABEL"
 
-export LABEL PATHNAME
-
-
-WINDOW=`tmux list-windows | awk '{ print $2 }' | grep ^$LABEL$`
+WINDOW=`tmux list-windows | awk '{ print $2 }' | grep ^$LABEL.$`
 echo "WINDOW: $WINDOW"
 if [[ -z $WINDOW ]]
 then

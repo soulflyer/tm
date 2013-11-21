@@ -4,6 +4,7 @@
 # Build your window here
 # $LABEL contains the name of the tmux window being created
 # *************************************************************************************
+echo "Label is: $LABEL"
 tmux split-window -d -h -t :$LABEL
 tmux split-window -d -v -t :$LABEL 'emacsclient -nw . ; bash -l'
 #set the layout by hand then call tmux list-windows to get the incantation for select-layout
