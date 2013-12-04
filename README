@@ -8,6 +8,13 @@ don't forget to add .tmux to your .gitignore
 
 the directory dottmux contains examples of my favorite layouts.
 
+These can be used by adding the following links in home:
+ln -s ~/Code/tm/dottmux/default .tmux.default
+ln -s ~/Code/tm/dottmux/startup .tmux.startup
+
+along with this for the config file:
+ln -s ~/Code/tm/tmux.conf .tmux.conf
+
 TODO:
 tm will only work with the current directory. It needs to be able to accept a path on the command line and open a new window on that.
 A different session can be specified when using the new option, but not without it. This needs to be consistent, either remove the ability to specify a different session or make it possible to specify a different session when running tm without the new option

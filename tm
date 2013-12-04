@@ -1,9 +1,7 @@
 #!/bin/bash
 
-
 SESSION="dev"
 PATHNAME=`pwd`
-
 
 while getopts "ns:?h" flag
 do
@@ -96,7 +94,6 @@ then
 else
     echo "found session"
 fi
-
 
 WINDOW=`tmux list-windows | awk '{ print $2 }' | grep ^$LABEL.$`
 echo "WINDOW: $WINDOW"
