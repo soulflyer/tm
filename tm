@@ -1,9 +1,7 @@
 #!/bin/bash
 
-
 SESSION="dev"
 PATHNAME=`pwd`
-
 
 while getopts "ns:?h" flag
 do
