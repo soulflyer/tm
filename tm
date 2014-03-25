@@ -95,7 +95,6 @@ else
     echo "found session"
 fi
 
-
 WINDOW=`tmux list-windows | awk '{ print $2 }' | grep ^$LABEL.$`
 echo "WINDOW: $WINDOW"
 if [[ -z $WINDOW ]]
