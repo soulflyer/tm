@@ -68,6 +68,8 @@ then
     PATHNAME=$*
 fi
 echo "pathname $PATHNAME"
+cd $PATHNAME
+PATHNAME=`pwd`
 
 LABEL=`basename $PATHNAME`
 echo "Label $LABEL"

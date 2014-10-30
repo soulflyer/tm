@@ -12,6 +12,6 @@ tmux select-layout -t :$LABEL "5c65,204x63,0,0{111x63,0,0,92x63,112,0[92x43,112,
 tmux select-window -t :$LABEL
 # Put the cursor in pane 2 (the top right pane, running emacs client)
 tmux select-pane -t 2
-sleep 3
+#sleep 1
 tmux send-keys -t :$LABEL.2 M-x 'org-todo-list' C-m
 # *************************************************************************************
