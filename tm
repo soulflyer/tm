@@ -83,6 +83,7 @@ if ! tmux list-sessions
 then
     cd ~
     echo "No session, creating a new one"
+    tmux start-server
     tmux new-session -d -s dev
     tmux rename-window `basename $HOME`
     if [ -e ~/.tmux.startup ]
@@ -95,7 +96,7 @@ then
     fi
 else
     echo "found session"
-fi
+# fi
 
 WINDOW=`tmux list-windows | awk '{ print $2 }' | grep ^$LABEL.$`
 echo "WINDOW: $WINDOW"
@@ -119,5 +120,6 @@ then
     fi
 else
     echo "Warning: window called $WINDOW already exists"
+fi
 fi
 tmux attach

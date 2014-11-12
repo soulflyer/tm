@@ -4,7 +4,8 @@
 # Build your window here
 # $LABEL contains the name of the tmux window being created
 # *************************************************************************************
-
+echo "running dottmux/startup"
+LABEL=`basename $HOME`
 echo "Label is: $LABEL"
 tmux split-window -d -h -t :$LABEL
 tmux split-window -d -v -t :$LABEL 'emacsclient -nw . ; bash -l'
