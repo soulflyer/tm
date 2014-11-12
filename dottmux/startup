@@ -4,14 +4,19 @@
 # Build your window here
 # $LABEL contains the name of the tmux window being created
 # *************************************************************************************
+
 echo "Label is: $LABEL"
 tmux split-window -d -h -t :$LABEL
 tmux split-window -d -v -t :$LABEL 'emacsclient -nw . ; bash -l'
 #set the layout by hand then call tmux list-windows to get the incantation for select-layout
-tmux select-layout -t :$LABEL "5c65,204x63,0,0{111x63,0,0,92x63,112,0[92x43,112,0,92x19,112,44]}"
+if [ $HOSTNAME == subversion.local ]
+then
+    tmux select-layout -t :$LABEL "5c65,204x63,0,0{111x63,0,0,92x63,112,0[92x43,112,0,92x19,112,44]}"
+fi
+
 tmux select-window -t :$LABEL
 # Put the cursor in pane 2 (the top right pane, running emacs client)
 tmux select-pane -t 2
-#sleep 1
+sleep 1
 tmux send-keys -t :$LABEL.2 M-x 'org-todo-list' C-m
 # *************************************************************************************
