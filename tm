@@ -122,4 +122,4 @@ else
     echo "Warning: window called $WINDOW already exists"
 fi
 fi
-tmux attach
+tmux -2 attach
