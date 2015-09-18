@@ -61,17 +61,17 @@ EOF
     esac
 done
 shift $((OPTIND-1))
-echo $*
+echo "$*"
 echo "Session $SESSION"
-if [ $* ]
+if [ "$*" ]
 then
     PATHNAME=$*
 fi
 echo "pathname $PATHNAME"
 cd $PATHNAME
-PATHNAME=`pwd`
+PATHNAME=$(pwd)
 
-LABEL=`basename $PATHNAME`
+LABEL=$(basename $PATHNAME)
 echo "Label $LABEL"
 
 export LABEL PATHNAME
@@ -102,13 +102,13 @@ WINDOW=`tmux list-windows | awk '{ print $2 }' | grep ^$LABEL.$`
 echo "WINDOW: $WINDOW"
 if [[ -z $WINDOW ]]
 then
-    tmux set default-path $PATHNAME
-    tmux new-window -d -n $LABEL
-    if [ -e $PATHNAME/.tmux ]
+    tmux set default-path "$PATHNAME"
+    tmux new-window -d -n "$LABEL"
+    if [ -e "$PATHNAME/.tmux" ]
     then
         echo "Found tmux conf file"
         echo "Adding window to session by running $PATHNAME/.tmux"
-        bash $PATHNAME/.tmux
+        bash "$PATHNAME/.tmux"
         echo "Attaching to session"
     else
         echo "No project .tmux found"
