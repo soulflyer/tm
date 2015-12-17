@@ -19,6 +19,8 @@ else
 fi
 
 tmux select-window -t :$LABEL
+
+tmux send-keys -t $LABEL.1 /opt/local/bin/mutt C-m
 # Put the cursor in pane 2 (the top right pane, running emacs client)
 tmux select-pane -t 2
 sleep 1
