@@ -22,7 +22,7 @@ then
 fi
 tmux select-window -t $LABEL
 
-tmux send-keys -t :$LABEL.1 'ec .' C-m
+tmux send-keys -t :$LABEL.1 'ec src/*/core.clj' C-m
 
 # Put the cursor in pane 2 (the top right pane, running emacs client)
 tmux select-pane -t 2
