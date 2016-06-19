@@ -1,5 +1,5 @@
 #!/bin/bash
-
+TMUX_EXECUTABLE="/opt/local/bin/tmux"
 SESSION="dev"
 PATHNAME=`pwd`
 
@@ -79,31 +79,31 @@ export LABEL PATHNAME
 # If there isn't already a tmux session running then start one with a default window
 # and a window on the current  (or specified) directory. If it is started from the
 # home directory then only the default window will be created
-if ! tmux list-sessions
+if ! $TMUX_EXECUTABLE list-sessions
 then
     cd ~
     echo "No session, creating a new one"
-    tmux start-server
-    tmux new-session -d -s dev
-    tmux rename-window `basename $HOME`
+    $TMUX_EXECUTABLE start-server
+    $TMUX_EXECUTABLE new-session -d -s dev
+    $TMUX_EXECUTABLE rename-window `basename $HOME`
     if [ -e ~/.tmux.startup ]
     then
         echo "Adding startup windows"
         bash ~/.tmux.startup
     else
-        tmux split-window -h
-        tmux split-window -v
+        $TMUX_EXECUTABLE split-window -h
+        $TMUX_EXECUTABLE split-window -v
     fi
 else
     echo "found session"
 # fi
 
-WINDOW=`tmux list-windows | awk '{ print $2 }' | grep ^$LABEL.$`
+WINDOW=`$TMUX_EXECUTABLE list-windows | awk '{ print $2 }' | grep ^$LABEL.$`
 echo "WINDOW: $WINDOW"
 if [[ -z $WINDOW ]]
 then
-    tmux set default-path "$PATHNAME"
-    tmux new-window -d -n "$LABEL"
+#    $TMUX_EXECUTABLE set default-path "$PATHNAME"
+    $TMUX_EXECUTABLE new-window -d -n "$LABEL"
     if [ -e "$PATHNAME/.tmux" ]
     then
         echo "Found tmux conf file"
@@ -122,4 +122,4 @@ else
     echo "Warning: window called $WINDOW already exists"
 fi
 fi
-tmux -2 attach
+$TMUX_EXECUTABLE -2 attach
