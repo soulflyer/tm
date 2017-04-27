@@ -72,6 +72,7 @@ cd $PATHNAME
 PATHNAME=$(pwd)
 
 LABEL=$(basename $PATHNAME)
+LABEL=${LABEL//./_}
 echo "Label $LABEL"
 
 export LABEL PATHNAME
