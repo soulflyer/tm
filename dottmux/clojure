@@ -13,7 +13,7 @@
 # *************************************************************************************
 
 tmux split-window -d -h -t $LABEL
-tmux split-window -d -v -t $LABEL 'emacsclient -nw project.clj ; bash -l'
+tmux split-window -d -v -t $LABEL 'emacsclient -nw README.md ; bash -l'
 
 if ! tmux select-layout -t $LABEL "5c65,204x63,0,0{111x63,0,0,92x63,112,0[92x43,112,0,92x19,112,44]}"
 then
