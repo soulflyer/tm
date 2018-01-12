@@ -29,5 +29,5 @@ sleep 3
 # Put the cursor in pane 2 (the top right pane, running emacs client)
 tmux select-pane -t 1
 tmux send-keys -t :$LABEL.2 M-x 'org-todo-list' C-m
-tmux send-keys -t :$LABEL.1 M-x 'org-todo-list' C-m
+# tmux send-keys -t :$LABEL.1 M-x 'org-todo-list' C-m
 # *************************************************************************************
