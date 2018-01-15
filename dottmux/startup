@@ -21,10 +21,8 @@ else
 fi
 
 tmux select-window -t :$LABEL
-
-tmux send-keys -t :$LABEL.1 M-x 'mu4e' C-m
-# Put the cursor in pane 2 (the top right pane, running emacs client)
-tmux select-pane -t 2
 sleep 1
+tmux send-keys -t :$LABEL.1 M-x 'mu4e' C-m
+# sleep 1
 tmux send-keys -t :$LABEL.2 M-x 'org-todo-list' C-m
 # **********************************************************
