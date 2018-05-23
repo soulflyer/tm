@@ -10,7 +10,7 @@ echo "Label is: $LABEL"
 tmux split-window -d -h -t :$LABEL
 tmux split-window -d -v -t :$LABEL
 tmux send-keys -t :$LABEL.1 'emacsclient -c --eval "(mu4e)" ; bash -l' C-m
-tmux send-keys -t :$LABEL.2 'ec -c --eval "(org-todo-list)" ; bash -l' C-m
+tmux send-keys -t :$LABEL.2 'ec ~/Documents/org-mode ; bash -l' C-m
 #set the layout by hand then call tmux list-windows to get the incantation for select-layout
 if [ $HOSTNAME == subversion.local ]
 then
