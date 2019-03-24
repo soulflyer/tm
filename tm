@@ -1,5 +1,5 @@
 #!/bin/bash
-TMUX_EXECUTABLE="/opt/local/bin/tmux"
+[[ -f /opt/local/bin/tmux ]] && TMUX_EXECUTABLE="/opt/local/bin/tmux" || TMUX_EXECUTABLE="/usr/bin/tmux"
 SESSION="dev"
 PATHNAME=`pwd`
 
