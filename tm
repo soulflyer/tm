@@ -1,5 +1,6 @@
 #!/bin/bash
-[[ -f /opt/local/bin/tmux ]] && TMUX_EXECUTABLE="/opt/local/bin/tmux" || TMUX_EXECUTABLE="/usr/bin/tmux"
+[[ -f /opt/local/bin/tmux ]] && TMUX_EXECUTABLE="/opt/local/bin/tmux" || TMUX_EXECUTABLE=`which tmux`
+echo "tmux executeable found in " $TMUX_EXECUTABLE
 SESSION="dev"
 PATHNAME=`pwd`
 
