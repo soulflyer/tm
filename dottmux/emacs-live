@@ -13,7 +13,7 @@
 # *************************************************************************************
 # tmux set default-path $PATHNAME
 # tmux new-window -d -n $LABEL
-TME=/opt/local/bin/tmux
+TME=`which tmux`
 echo "Running dottmux/default"
 echo $LABEL
 $TME split-window -d -h -t $LABEL

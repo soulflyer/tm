@@ -13,7 +13,7 @@
 # *************************************************************************************
 # tmux set default-path $PATHNAME
 # tmux new-window -d -n $LABEL
-TME=/opt/local/bin/tmux
+TME=`which tmux`
 EMACSCLIENT=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient
 echo "Running dottmux/default"
 echo $LABEL
