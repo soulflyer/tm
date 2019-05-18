@@ -88,10 +88,9 @@ then
     $TMUX_EXECUTABLE start-server
     $TMUX_EXECUTABLE new-session -d -s dev
     $TMUX_EXECUTABLE rename-window `basename $HOME`
-    if [ -e ~/.tmux.startup ]
+    if [ -e ~/.tmux/startup ]
     then
-        echo "Adding startup windows"
-        bash ~/.tmux.startup
+        bash ~/.tmux/startup
     else
         $TMUX_EXECUTABLE split-window -h
         $TMUX_EXECUTABLE split-window -v
@@ -100,28 +99,28 @@ else
     echo "found session"
 # fi
 
-WINDOW=`$TMUX_EXECUTABLE list-windows | awk '{ print $2 }' | grep ^$LABEL.$`
-echo "WINDOW: $WINDOW"
-if [[ -z $WINDOW ]]
-then
-#    $TMUX_EXECUTABLE set default-path "$PATHNAME"
-    $TMUX_EXECUTABLE new-window -d -n "$LABEL"
-    if [ -e "$PATHNAME/.tmux" ]
+    WINDOW=`$TMUX_EXECUTABLE list-windows | awk '{ print $2 }' | grep ^$LABEL.$`
+    echo "WINDOW: $WINDOW"
+    if [[ -z $WINDOW ]]
     then
-        echo "Found tmux conf file"
-        echo "Adding window to session by running $PATHNAME/.tmux"
-        bash "$PATHNAME/.tmux"
-        echo "Attaching to session"
-    else
-        echo "No project .tmux found"
-        if [ -e ~/.tmux.default ]
+    #    $TMUX_EXECUTABLE set default-path "$PATHNAME"
+        $TMUX_EXECUTABLE new-window -d -n "$LABEL"
+        if [ -f "$PATHNAME/.tmux" ]
         then
-            echo "Adding window to session by running ~/.tmux.default"
-            bash ~/.tmux.default
+            echo "Found tmux conf file"
+            echo "Adding window to session by running $PATHNAME/.tmux"
+            bash "$PATHNAME/.tmux"
+            echo "Attaching to session"
+        else
+            echo "No project .tmux found"
+            if [ -e ~/.tmux.default ]
+            then
+                echo "Adding window to session by running ~/.tmux.default"
+                bash ~/.tmux.default
+            fi
         fi
+    else
+        echo "Warning: window called $WINDOW already exists"
     fi
-else
-    echo "Warning: window called $WINDOW already exists"
-fi
 fi
 $TMUX_EXECUTABLE -2 attach
