@@ -1,0 +1,57 @@
+#!/bin/bash
+#
+# This file was copied from ~/.tmux.default
+#
+# Contains commands to add a new window to an existing tmux session
+#
+# Note that it is best to create the window in detached state (-d option) so that
+# the window is complete before displaying it with select-window. tmux messes up the
+# initial display if you don't.
+
+# *************************************************************************************
+# Build your window here
+# *************************************************************************************
+# tmux set default-path $PATHNAME
+# tmux new-window -d -n $LABEL
+[[ -f /opt/local/bin/tmux ]] && TMUX_EXECUTABLE="/opt/local/bin/tmux" || TMUX_EXECUTABLE=`which tmux`
+echo "tmux executeable found in " $TMUX_EXECUTABLE
+[[ -f /Applications/Emacs.app/Contents/MacOS/bin/emacsclient ]] && EMACSCLIENT=/Applications/Emacs.app/Contents/MacOS/bin/emacsclient || EMACSCLIENT=`which emacsclient`
+
+echo "Running dottmux/default"
+echo $LABEL
+$TMUX_EXECUTABLE split-window -d -h -t $LABEL
+$TMUX_EXECUTABLE split-window -d -v -t  $LABEL.1
+$TMUX_EXECUTABLE split-window -d -v -t  $LABEL.2
+$TMUX_EXECUTABLE split-window -d -v -t $LABEL.3
+$TMUX_EXECUTABLE split-window -d -v -t $LABEL.1
+$TMUX_EXECUTABLE split-window -d -v -t $LABEL.1
+$TMUX_EXECUTABLE split-window -d -v -t $LABEL.3
+$TMUX_EXECUTABLE split-window -d -v -t $LABEL.5
+
+$TMUX_EXECUTABLE split-window -d -v -t  $LABEL.9
+$TMUX_EXECUTABLE split-window -d -v -t  $LABEL.9
+$TMUX_EXECUTABLE split-window -d -v -t $LABEL.9
+$TMUX_EXECUTABLE split-window -d -v -t $LABEL.11
+$TMUX_EXECUTABLE split-window -d -v -l 28 -t $LABEL.13
+# $TMUX_EXECUTABLE split-window -d -v -t $LABEL.13
+
+$TMUX_EXECUTABLE select-window -t $LABEL
+# $TMUX_EXECUTABLE select-window -t $LABEL
+
+
+tmux send-keys -t $SESSION:$LABEL.1 'pt lupta; tail -f lupta.log' C-m
+tmux send-keys -t $SESSION:$LABEL.2 'pt woco; tail -f woco.log' C-m
+tmux send-keys -t $SESSION:$LABEL.3 'pt importer; tail -f importer.log' C-m
+tmux send-keys -t $SESSION:$LABEL.4 'pt suche; tail -f suche.log' C-m
+tmux send-keys -t $SESSION:$LABEL.5 'pt paul; tail -f paul.log' C-m
+tmux send-keys -t $SESSION:$LABEL.6 'pt css; tail -f css.log' C-m
+tmux send-keys -t $SESSION:$LABEL.7 'pt configuration-ui; tail -f configuration-ui.log' C-m
+tmux send-keys -t $SESSION:$LABEL.8 'pt LangLoc; tail -f LangLoc.log' C-m
+tmux send-keys -t $SESSION:$LABEL.9 'pt screenshot-service; tail -f screenshot-service.log' C-m
+tmux send-keys -t $SESSION:$LABEL.10 'pt lupta; tail -f goose.log' C-m
+tmux send-keys -t $SESSION:$LABEL.11 'pt visualization; tail -f visualization.log' C-m
+tmux send-keys -t $SESSION:$LABEL.12 'pt geomap; tail -f geomap.log' C-m
+tmux send-keys -t $SESSION:$LABEL.13 'pt rechte-rollen; tail -f rechte-rollen.log' C-m
+tmux send-keys -t $SESSION:$LABEL.14 'cd ..; status' C-m
+
+# *************************************************************************************
