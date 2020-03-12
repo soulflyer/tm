@@ -48,7 +48,7 @@ tmux send-keys -t $SESSION:$LABEL.6 'pt css; tail -f css.log' C-m
 tmux send-keys -t $SESSION:$LABEL.7 'pt configuration-ui; tail -f configuration-ui.log' C-m
 tmux send-keys -t $SESSION:$LABEL.8 'pt LangLoc; tail -f LangLoc.log' C-m
 tmux send-keys -t $SESSION:$LABEL.9 'pt screenshot-service; tail -f screenshot-service.log' C-m
-tmux send-keys -t $SESSION:$LABEL.10 'pt lupta; tail -f goose.log' C-m
+tmux send-keys -t $SESSION:$LABEL.10 'pt goose; tail -f goose.log' C-m
 tmux send-keys -t $SESSION:$LABEL.11 'pt visualization; tail -f visualization.log' C-m
 tmux send-keys -t $SESSION:$LABEL.12 'pt geomap; tail -f geomap.log' C-m
 tmux send-keys -t $SESSION:$LABEL.13 'pt rechte-rollen; tail -f rechte-rollen.log' C-m
