@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+LABEL="Reddell"
+SESSION=`tmux display-message -p "#S"`
+tmux new-window -d -n "$LABEL"
+tmux split-window -d -h -t :$LABEL
+tmux split-window -d -v -t :$LABEL
+#set the layout by hand then call tmux list-windows to get the incantation for select-layout
+if [ $HOSTNAME == subversion.local ]
+then
+    echo "selecting layout for subversion"
+    tmux select-layout -t :$LABEL "5c65,204x63,0,0{111x63,0,0,92x63,112,0[92x43,112,0,92x19,112,44]}"
+    echo "Layout selected"
+else
+    # tmux select-layout -t :$LABEL "8995,227x84,0,0{113x84,0,0,4,113x84,114,0[113x60,114,0,6,113x23,114,61,5]}"
+    tmux select-layout -t :$LABEL "bd5c,151x41,0,0{89x41,0,0,61x41,90,0[61x26,90,0,61x14,90,27]}"
+fi
+tmux send-keys -t $SESSION:$LABEL.1 'ssh reddell' C-m
+tmux send-keys -t $SESSION:$LABEL.2 'ssh reddell' C-m
+tmux send-keys -t $SESSION:$LABEL.3 'ssh reddell' C-m
+tmux select-window -t $LABEL

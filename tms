@@ -6,9 +6,9 @@ tmux set default-path ~
 tmux new-window -dn $windowname
 tmux split-window -d -h -t :$windowname
 tmux split-window -d -v -t :$windowname
-# tmux split-window -d -v -t :$windowname
+tmux split-window -d -v -t :$windowname
 tmux select-layout -t :$windowname "dfe0,204x63,0,0{111x63,0,0,92x63,112,0[92x21,112,0,92x21,112,22,92x19,112,44]}"
-tmux send-keys -t :$windowname.2 'ssh Mimi.local ; ssh $mimiIP ; bash -l' C-m
-# tmux send-keys -t :$windowname.3 'ssh blackbook.local' C-m
+tmux send-keys -t :$windowname.2 'ssh mimi ; ssh $mimiIP ; bash -l' C-m
+tmux send-keys -t :$windowname.3 'ssh reddell' C-m
 tmux send-keys -t :$windowname.1 'ssh jphuquoc@soulflyer.co.uk' C-m
 tmux select-window -t $windowname
