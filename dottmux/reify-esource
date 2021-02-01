@@ -1,0 +1,35 @@
+#!/bin/bash
+#
+# **********************************************************
+# Build your window here
+# $LABEL contains the name of the tmux window being created
+# **********************************************************
+TME=`which tmux`
+
+echo "running dottmux/reify-esource"
+echo "Label is: $LABEL"
+SESSION=`tmux display-message -p "#S"`
+echo "session is: $SESSION"
+$TME split-window -d -h -t :$LABEL
+$TME split-window -d -v -t :$LABEL.2
+$TME split-window -d -v -t :$LABEL.3
+$TME split-window -d -v -t :$LABEL.4
+
+$TME select-window -t $LABEL
+# #set the layout by hand then call tmux list-windows to get the incantation for select-layout
+# if [ $HOSTNAME == subversion.local ]
+# then
+#     echo "selecting layout for subversion"
+tmux select-layout -t :$LABEL "11c6,364x83,0,0{182x83,0,0,37,181x83,183,0[181x20,183,0,38,181x41,183,21,39,181x10,183,63,40,181x9,183,74,41]}"
+#     echo "Layout selected"
+# else
+#     # tmux select-layout -t :$LABEL "8995,227x84,0,0{113x84,0,0,4,113x84,114,0[113x60,114,0,6,113x23,114,61,5]}"
+#     tmux select-layout -t :$LABEL "bd5c,151x41,0,0{89x41,0,0,61x41,90,0[61x26,90,0,61x14,90,27]}"
+# fi
+echo "Sending keys"
+$TME list-sessions
+$TME send-keys -t $SESSION:$LABEL.1 'ec .' C-m
+$TME send-keys -t $SESSION:$LABEL.2 'ec .' C-m
+$TME send-keys -t $SESSION:$LABEL.5 'docker-compose up'
+$TME send-keys -t $SESSION:$LABEL.4 'make run'
+echo "Keys sent"

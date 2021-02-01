@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# **********************************************************
+# Build your window here
+# $LABEL contains the name of the tmux window being created
+# **********************************************************
+TME=`which tmux`
+
+echo "running dottmux/reify-esource"
+echo "Label is: $LABEL"
+SESSION=`tmux display-message -p "#S"`
+echo "session is: $SESSION"
+$TME split-window -d -h -t :$LABEL
+$TME split-window -d -v -t :$LABEL.2
+
+$TME select-window -t $LABEL
+$TME select-layout -t :$LABEL "b450,364x83,0,0{182x83,0,0,24,181x83,183,0[181x56,183,0,25,181x26,183,57,26]}"
+$TME select-pane -t 3
+
+$TME list-sessions
+$TME send-keys -t $SESSION:$LABEL.1 'ec .' C-m
+$TME send-keys -t $SESSION:$LABEL.2 'ec .' C-m
+$TME send-keys -t $SESSION:$LABEL.3 'yarn start'
