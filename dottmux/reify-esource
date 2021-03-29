@@ -31,5 +31,5 @@ $TME list-sessions
 $TME send-keys -t $SESSION:$LABEL.1 'ec .' C-m
 $TME send-keys -t $SESSION:$LABEL.2 'ec .' C-m
 $TME send-keys -t $SESSION:$LABEL.5 'docker-compose up'
-$TME send-keys -t $SESSION:$LABEL.4 'make run'
+$TME send-keys -t $SESSION:$LABEL.4 'make repl'
 echo "Keys sent"
