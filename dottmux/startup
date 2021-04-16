@@ -12,7 +12,7 @@ echo "session is: $SESSION"
 tmux split-window -d -h -t :$LABEL
 tmux split-window -d -v -t :$LABEL
 #set the layout by hand then call tmux list-windows to get the incantation for select-layout
-if [ $HOSTNAME == subversion.local ]
+if [ $HOSTNAME == subversion ]
 then
     echo "selecting layout for subversion"
     tmux select-layout -t :$LABEL "5c65,204x63,0,0{111x63,0,0,92x63,112,0[92x43,112,0,92x19,112,44]}"

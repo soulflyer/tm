@@ -4,6 +4,10 @@ echo "tmux executeable found in " $TMUX_EXECUTABLE
 SESSION="dev"
 PATHNAME=`pwd`
 
+RED="\033[1;31m"
+GREEN="\033[1;32m"
+NOCOLOUR="\033[0m"
+
 while getopts "ns:?h" flag
 do
     echo "$flag" $OPTIND $OPTARG
@@ -99,8 +103,13 @@ else
     echo "found session"
 # fi
     echo $TMUX_EXECUTABLE
+    # Don't know why, but this doesn't terminate. tmux inside $() or `` doesn't seem to work
     # WINDOW=`$TMUX_EXECUTABLE list-windows | awk '{ print $2}' | grep ^$LABEL.$`
     $TMUX_EXECUTABLE list-windows > "/tmp/tmux-windows"
+    WINDOWNAMES=$(cat "/tmp/tmux-windows" | awk '{print $2}')
+    echo "Window names:"
+    echo $WINDOWNAMES
+    echo "******************"
     WINDOW=$(cat "/tmp/tmux-windows" | awk '{print $2}' | grep ^$LABEL.$)
     echo "WINDOW: $WINDOW"
     if [[ -z $WINDOW ]]
@@ -122,7 +131,7 @@ else
             fi
         fi
     else
-        echo "Warning: window called $WINDOW already exists"
+        echo -e "${RED}Warning:${NOCOLOUR} window called $WINDOW already exists"
     fi
 fi
 $TMUX_EXECUTABLE -2 attach
