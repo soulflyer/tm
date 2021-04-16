@@ -13,7 +13,7 @@ echo "session is: $SESSION"
 $TME split-window -d -h -t :$LABEL
 $TME split-window -d -v -t :$LABEL.2
 $TME split-window -d -v -t :$LABEL.3
-$TME split-window -d -v -t :$LABEL.4
+# $TME split-window -d -v -t :$LABEL.4
 
 $TME select-window -t $LABEL
 # #set the layout by hand then call tmux list-windows to get the incantation for select-layout
@@ -30,7 +30,7 @@ echo "Sending keys"
 $TME list-sessions
 $TME send-keys -t $SESSION:$LABEL.1 'ec .' C-m
 $TME send-keys -t $SESSION:$LABEL.2 'ec .' C-m
-$TME send-keys -t $SESSION:$LABEL.4 'DATABASE_URL="$SPONSOR_DATABASE_URL" lein sponsor-repl'
-$TME send-keys -t $SESSION:$LABEL.5 'DATABASE_URL="$SITE_DATABASE_URL" PORT=2999 lein with-profile +test-site site-repl'
+# $TME send-keys -t $SESSION:$LABEL.4 'DATABASE_URL="$SPONSOR_DATABASE_URL" lein sponsor-repl'
+# $TME send-keys -t $SESSION:$LABEL.5 'DATABASE_URL="$SITE_DATABASE_URL" PORT=2999 lein with-profile +test-site site-repl'
 # $TME send-keys -t $SESSION:$LABEL.4 'make run'
 echo "Keys sent"

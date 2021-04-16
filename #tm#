@@ -99,6 +99,7 @@ else
     echo "found session"
 # fi
     echo $TMUX_EXECUTABLE
+    # Don't know why, but this doesn't terminate. tmux inside $() or `` doesn't seem to work
     # WINDOW=`$TMUX_EXECUTABLE list-windows | awk '{ print $2}' | grep ^$LABEL.$`
     $TMUX_EXECUTABLE list-windows > "/tmp/tmux-windows"
     WINDOW=$(cat "/tmp/tmux-windows" | awk '{print $2}' | grep ^$LABEL.$)
