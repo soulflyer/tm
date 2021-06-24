@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+# **********************************************************
+# Build your window here
+# $LABEL contains the name of the tmux window being created
+# **********************************************************
+echo "running dottmux/zulip"
+
+echo "Label is: $LABEL"
+SESSION=`tmux display-message -p "#S"`
+echo "session is: $SESSION"
+echo "Sending keys"
+tmux list-sessions
+tmux select-window -t $LABEL
+tmux send-keys -t :$LABEL.1 'source ~/zt_venv/bin/activate; zulip-term ; deactivate' C-m
+# tmux send-keys -t :$LABEL.1 'zulip-term' C-m
+echo "Keys sent"
