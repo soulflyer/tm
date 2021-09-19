@@ -23,7 +23,7 @@ else
 fi
 echo "Sending keys"
 tmux list-sessions
-tmux send-keys -t $SESSION:$LABEL.1 'ec  ; bash -l' C-m
+tmux send-keys -t $SESSION:$LABEL.1 'ecn ; bash -l' C-m
 tmux send-keys -t $SESSION:$LABEL.2 'eco ; bash -l' C-m
 tmux select-pane -t 3
 echo "Keys sent"
